@@ -1,24 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+
+  const [url, setUrl] = useState<string>();
+
+  function request(params: { method: string }) {
+    if (url) {
+      fetch(url + '/api', params)
+        .then(res => res.json())
+        .then(data => console.log(data))
+    } else {
+      fetch('/api', params)
+        .then(res => res.json())
+        .then(data => console.log(data))
+    }
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input type="text" onChange={ (e) => setUrl(e.target.value as string) }/>
+      <div>
+        { url }
+      </div>
+      <div>
+        Get
+        <button onClick={ () => {
+          request({
+            method: 'GET',
+          });
+        } }>
+          Click me
+        </button>
+      </div>
+      <div>
+        Post
+        <button onClick={ () => {
+          request({
+            method: 'POST',
+          })
+        } }>Click me</button>
+      </div>
+      <div>
+        Put
+        <button onClick={ () => {
+          request({
+            method: 'PUT'
+          })
+        } }>Click me</button>
+      </div>
+      <div>
+        Delete
+        <button onClick={ () => {
+          request({
+            method: 'DELETE'
+          });
+        } }>Click me</button>
+      </div>
     </div>
   );
 }
