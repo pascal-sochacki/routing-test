@@ -7,14 +7,11 @@ function App() {
   function request(params: { method: string }) {
     if (url) {
       fetch(url + '/api', params)
-        .then(res => res.json())
         .then(data => console.log(data))
     } else {
       fetch('/api', params)
-        .then(res => res.json())
         .then(data => console.log(data))
     }
-
   }
 
   return (
