@@ -4,6 +4,7 @@ frontend:
   image:
     repository: ghcr.io/pascal-sochacki/routing-test-frontend
     pullPolicy: IfNotPresent
+    tag: 0.0.2
 
   imagePullSecrets: [ ]
   nameOverride: ""
